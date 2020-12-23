@@ -46,6 +46,7 @@ else:
 
 # configuring model
 model = Backbone()
+model = model.cuda()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=1e-4)
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 40, gamma=0.1)
 if args.baseline:
@@ -61,6 +62,8 @@ model.train()
 for epoch in range(120):
     end = time.time()
     for i, (images, labels) in enumerate(train_loader):
+        images = images.cuda()
+        labels = labels.cuda()
         outputs = model(images)
         loss = criterion(outputs, labels)
         optimizer.zero_grad()

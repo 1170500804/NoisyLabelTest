@@ -10,7 +10,7 @@ def generate_noisy_label(clean_labels, eta=0.6):
     noisy_num = round(eta * total_num)
     noisy_index = sorted(np.random.choice(total_num,noisy_num, replace=False))
     noisy_addition = np.random.choice(8, noisy_num)+1
-    noisy_addition = noisy_addition.asarray(np.long)
+    noisy_addition = noisy_addition.astype(np.long)
     clean_labels[noisy_index] = clean_labels[noisy_index] + noisy_addition
     noisy_labels = clean_labels % 10
     print(noisy_labels.dtype)
