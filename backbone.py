@@ -28,6 +28,7 @@ class Backbone(nn.Module):
 
 class Basicblock(nn.Module):
     def __init__(self, in_channel, out_channel, kernel=3):
+        super(Basicblock, self).__init__()
         self.conv_1 = nn.Conv2d(in_channel, out_channel, kernel, padding=1)
         self.conv_2 = nn.Conv2d(in_channel, out_channel, kernel, padding=1)
         self.bn_1 = nn.BatchNorm2d(out_channel)
