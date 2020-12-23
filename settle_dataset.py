@@ -48,7 +48,42 @@ def generate_csv(path='/data_b/lius/cifar-10-batches-py'):
     df = pd.DataFrame(data=cifar10)
     df.to_csv('./cifar10.csv')
 
-# save_to_image()
-# generate_csv()
+def save_test(path='/data_b/lius/cifar-10-batches-py'):
+    batch = os.path.join(path, 'test_batch')
+    batch_path = os.path.join(path, batch)
+    batch_dict = unpickle(batch_path)
+    batch_data = batch_dict[b'data']
+    batch_label = batch_dict[b'labels']
+    num = batch_data.shape[0]
+    batch_data = batch_data.reshape(-1, 3, 32, 32)
+    batch_data = batch_data.astype(np.uint8)
+    save_dir = os.path.join(path, 'test_batch')
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
+    for j in range(num):
+        # print(batch_data[j].shape)
+        save_cifar_image(batch_data[j], os.path.join(save_dir, f'{j}.jpg'))
+        if (j+1) % 1000 == 0:
+            print(f'processed {j+1} images')
+    np.savetxt('test_batch.csv', batch_label)
+
+def generate_test_csv(path='/data_b/lius/cifar-10-batches-py'):
+    cifar10 = {'filepath': [], 'label': []}
+    data_batch = os.path.join(path, 'test_batch')
+    label_batch = os.path.join(path, 'test_batch.csv')
+    label_batch = np.loadtxt(label_batch)
+    for j in range(10000):
+        cur_img_path = os.path.join(data_batch, f'{j}.jpg')
+        cifar10['filepath'].append(cur_img_path)
+        cifar10['label'].append(label_batch[j])
+        if (j+1) % 3000 == 0:
+            print(f'processed {j+1} images')
+    df = pd.DataFrame(data=cifar10)
+    df.to_csv('./cifar10_test.csv')
+
+
+
+save_test()
+generate_test_csv()
 
 

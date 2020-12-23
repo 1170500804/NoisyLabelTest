@@ -30,11 +30,11 @@ parser.add_argument('--print', type=int, default=20)
 args = parser.parse_args()
 # check validity of arguments
 if args.baseline:
-    assert args.a is None
-    assert args.b is None
+    assert args.alpha is None
+    assert args.beta is None
 else:
-    assert not(args.a is None)
-    assert not(args.b is None)
+    assert not(args.alpha is None)
+    assert not(args.beta is None)
 
 if args.aug:
     augmentation = transforms.Compose([transforms.RandomApply(transforms.ColorJitter(0.4, 0.4, 0.4, 0.1), p=0.8),
