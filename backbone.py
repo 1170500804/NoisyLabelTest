@@ -28,8 +28,8 @@ class Backbone(nn.Module):
 
 class Basicblock(nn.Module):
     def __init__(self, in_channel, out_channel, kernel=3):
-        self.conv_1 = nn.Conv2d(in_channel, out_channel, kernel)
-        self.conv_2 = nn.Conv2d(in_channel, out_channel, kernel)
+        self.conv_1 = nn.Conv2d(in_channel, out_channel, kernel, padding=1)
+        self.conv_2 = nn.Conv2d(in_channel, out_channel, kernel, padding=1)
         self.bn_1 = nn.BatchNorm2d(out_channel)
         self.bn_2 = nn.BatchNorm2d(out_channel)
         self.relu = nn.ReLU(inplace=True)

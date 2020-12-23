@@ -78,7 +78,7 @@ for epoch in range(120):
                 'state_dict': model.state_dict(),
                 'optimizer': optimizer.state_dict(),
             }
-            save_checkpoint(state_dict, filename=f'checkpoint_{epoch}.pth.tar')
+            save_checkpoint(state_dict, filename=f'/data_b/lius/code/TestCaseCkps/checkpoint_{epoch}.pth.tar')
 
 # save last
 state_dict = {
@@ -86,7 +86,7 @@ state_dict = {
                 'state_dict': model.state_dict(),
                 'optimizer': optimizer.state_dict(),
             }
-save_checkpoint(state_dict, filename=f'checkpoint_{epoch}.pth.tar')
+save_checkpoint(state_dict, filename=f'/data_b/lius/code/TestCaseCkps/checkpoint_{epoch}.pth.tar')
 
 
 
