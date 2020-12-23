@@ -7,9 +7,14 @@ from torch.utils.data import DataLoader
 from torch import nn
 
 import argparse
+import time
 
 from backbone import Backbone
-from loss import ReverseCrossEntropy
+from loss import MixedEntropy
+
+def save_checkpoint(state, filename='checkpoint.pth.tar'):
+    torch.save(state, filename)
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--aug', action='store_true')
@@ -20,6 +25,7 @@ parser.add_argument('-e', '--eta', type=float, default=0.6)
 parser.add_argument('--batch-size', type=int, default=256)
 parser.add_argument('--workers', type=int, default=8)
 parser.add_argument('--resume', type=str)
+parser.add_argument('--print', type=int, default=20)
 
 args = parser.parse_args()
 # check validity of arguments
@@ -45,13 +51,46 @@ scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 40, gamma=0.1)
 if args.baseline:
     criterion = nn.CrossEntropyLoss()
 else:
-    reversed = ReverseCrossEntropy()
-    MCE = nn.CrossEntropyLoss()
+    criterion = MixedEntropy()
+
 # training
 train_dataset = cifar10(transform=augmentation)
 train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True,
                           num_workers=args.workers, pin_memory=True)
+model.train()
 for epoch in range(120):
+    end = time.time()
+    for i, (images, labels) in enumerate(train_loader):
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        scheduler.step()
+        if i % args.print == 0:
+            batch_time = time.time() - end
+            end = time.time()
+            print(f'training loss: {loss},time: {batch_time}')
+
+        if epoch in [20, 40, 60, 80, 100]:
+            state_dict = {
+                'epoch': epoch,
+                'state_dict': model.state_dict(),
+                'optimizer': optimizer.state_dict(),
+            }
+            save_checkpoint(state_dict, filename=f'checkpoint_{epoch}.pth.tar')
+
+# save last
+state_dict = {
+                'epoch': -1,
+                'state_dict': model.state_dict(),
+                'optimizer': optimizer.state_dict(),
+            }
+save_checkpoint(state_dict, filename=f'checkpoint_{epoch}.pth.tar')
+
+
+
+
 
 
 
