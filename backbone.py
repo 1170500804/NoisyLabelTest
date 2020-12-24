@@ -8,7 +8,7 @@ class Backbone(nn.Module):
         self.layer1 = Basicblock(3, 64)
         self.layer2 = Basicblock(64, 128)
         self.layer3 = Basicblock(128, 196)
-        # TODO: remember to flatten before fc
+        # remember to flatten before fc
         self.fc1 = nn.Linear(3136, 256)
         self.fc2 = nn.Linear(256,num_classes)
         self.relu = nn.ReLU(inplace=True)

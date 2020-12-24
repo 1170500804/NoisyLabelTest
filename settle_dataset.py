@@ -69,7 +69,7 @@ def save_test(path='/data_b/lius/cifar-10-batches-py'):
 
 def generate_test_csv(path='/data_b/lius/cifar-10-batches-py'):
     cifar10 = {'filepath': [], 'label': []}
-    data_batch = os.path.join(path, 'test_batch')
+    data_batch = os.path.join(path, 'data_batch_test')
     label_batch = os.path.join(path, 'test_batch.csv')
     label_batch = np.loadtxt(label_batch)
     for j in range(10000):
@@ -83,7 +83,7 @@ def generate_test_csv(path='/data_b/lius/cifar-10-batches-py'):
 
 
 
-save_test()
+# save_test()
 generate_test_csv()
 
 
