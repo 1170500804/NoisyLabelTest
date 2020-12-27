@@ -1,7 +1,24 @@
 import torch
 from torch import nn
+from torch.nn import init
 
 class Backbone(nn.Module):
+    def reset_params(self):
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                init.kaiming_normal_(m.weight, mode='fan_in')
+                if m.bias is not None:
+                    init.constant_(m.bias, 0)
+            elif isinstance(m, nn.BatchNorm2d):
+                init.constant_(m.weight, 1)
+                init.constant_(m.bias, 0)
+            elif isinstance(m, nn.BatchNorm1d):
+                init.constant_(m.weight, 1)
+                init.constant_(m.bias, 0)
+            elif isinstance(m, nn.Linear):
+                init.kaiming_normal_(m.weight, mode='fan_in')
+                if m.bias is not None:
+                    init.constant_(m.bias, 0)
     def __init__(self,num_classes=10):
         super(Backbone, self).__init__()
         self.num_classes = num_classes
@@ -13,6 +30,7 @@ class Backbone(nn.Module):
         self.fc2 = nn.Linear(256,num_classes)
         self.relu = nn.ReLU(inplace=True)
         self.batchnorm = nn.BatchNorm1d(256)
+        self.reset_params()
 
     def forward(self,x):
         x = self.layer1(x)

@@ -21,6 +21,7 @@ class cifar10(Dataset):
     def __init__(self, transform, path='/data_b/lius/cifar-10-batches-py', eta=0.6, if_test=False):
         CIFAR_MEAN = [0.49139968, 0.48215827, 0.44653124]
         CIFAR_STD = [0.24703233, 0.24348505, 0.26158768]
+        print('noisy labels ratio: '+str(eta))
         self.transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize(CIFAR_MEAN, CIFAR_STD)]) if if_test else transform

@@ -32,11 +32,11 @@ python3 main.py --eval --resume [path to saved model]
 
 ### Backbone.py
 
-This file implements the backbone, which is an 8-layer neural network, specified in the problem description.
+This file implements the backbone, which is an 8-layer neural network, specified in the problem description. Kaiming normal Initialization is used in the implementation of the backbone.
 
 ### Data.py
 
-This file implements the interface that loads data during training. The data augmentation method I use is *Random Crop* and *Random Horizontal Flip.*
+This file implements the interface that loads data during training phase. The data augmentation I use is *Random Crop* and *Random Horizontal Flip.*
 
 ### evaluate.py
 
@@ -50,7 +50,9 @@ This file implements the reversed cross entropy with A=-4
 
 This file transfers format of the cifar-10: pickle object to jpg files.
 
+## 2. Result
 
-
-## Result
+| CES  | Baseline |
+| :--: | :------: |
+|      |          |
 
