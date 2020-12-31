@@ -4,6 +4,8 @@
 
 **Code repository**: https://github.com/1170500804/NoisyLabelTest.git
 
+**Since the GitHub markdown interpreter doesn't fully support LaTex, a [comment on results](https://github.com/1170500804/NoisyLabelTest/blob/master/comments_on_results.pdf) is uploaded in the format of pdf.**
+
 ## 1. Introduction
 
 The language and framework that I use to implement this model is Python3 and Pytorch. The whole project is composited with 6 python files: `backbone.py, data.py, evaluate.py, loss.py, main.py, settle_datset.py`. The following of this section is the description of these files and their functions.
