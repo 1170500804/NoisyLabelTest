@@ -4,11 +4,11 @@
 
 **Code repository**: https://github.com/1170500804/NoisyLabelTest.git
 
-**The instruction of the test case is: [click here](https://github.com/1170500804/NoisyLabelTest/blob/master/CVML_testcase_NoisyLabel.pdf)**
+**The instruction of the test case is: [click here](https://github.com/1170500804/NoisyLabelTest/blob/master/materials/CVML_testcase_NoisyLabel.pdf)**
 
 **This test case references a paper: [Ghosh et.al. AAAI 2017](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14759/0)**
 
-**Since the GitHub markdown interpreter doesn't fully support LaTex, a [comment on results](https://github.com/1170500804/NoisyLabelTest/blob/master/comments_on_results.pdf) is uploaded in the format of pdf.**
+**Since the GitHub markdown interpreter doesn't fully support LaTex, a [comment on results](https://github.com/1170500804/NoisyLabelTest/blob/master/materials/comments_on_results.pdf) is uploaded in the format of pdf.**
 
 ## 1. Introduction
 
